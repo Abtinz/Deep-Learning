@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generator - Text to Image</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Image Generator</h1>
+            <p>Transform your text prompts into stunning images</p>
+        </header>
+
+        <main>
+            <!-- Generation Form -->
+            <section class="generator-section">
+                <div class="card">
+                    <h2>Generate Image</h2>
+                    <form id="generateForm">
+                        <div class="form-group">
+                            <label for="prompt">Enter your prompt:</label>
+                            <textarea 
+                                id="prompt" 
+                                name="prompt" 
+                                placeholder="e.g., a beautiful sunset over mountains, a futuristic city at night..."
+                                rows="3"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="steps">Inference Steps:</label>
+                                <input type="number" id="steps" name="steps" value="20" min="10" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="guidance">Guidance Scale:</label>
+                                <input type="number" id="guidance" name="guidance" value="7.5" min="1" max="20" step="0.5">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="width">Width:</label>
+                                <input type="number" id="width" name="width" value="512" min="256" max="1024" step="64">
+                            </div>
+                            <div class="form-group">
+                                <label for="height">Height:</label>
+                                <input type="number" id="height" name="height" value="512" min="256" max="1024" step="64">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="generateBtn" class="btn btn-primary">
+                            <span class="btn-text">Generate Image</span>
+                            <span class="btn-loader" style="display: none;">⏳ Generating...</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Generated Image Display -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="card">
+                    <h2>Generated Image</h2>
+                    <div id="imageContainer">
+                        <img id="generatedImage" alt="Generated image">
+                    </div>
+                    <div class="image-info" id="imageInfo"></div>
+                    <div class="image-actions">
+                        <button id="downloadBtn" class="btn btn-secondary">Download</button>
+                        <button id="generateAnotherBtn" class="btn btn-secondary">Generate Another</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <div class="card">
+                    <div class="gallery-header">
+                        <h2>Gallery</h2>
+                        <button id="refreshGalleryBtn" class="btn btn-small">Refresh</button>
+                    </div>
+                    <div id="gallery" class="gallery">
+                        <div class="loading" id="galleryLoading">Loading gallery...</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
