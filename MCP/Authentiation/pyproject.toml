@@ -1,0 +1,12 @@
+[project]
+name = "authentiation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastmcp>=2.13.0.2",
+    "sqlalchemy>=2.0.44",
+    "stytch>=13.27.0",
+]
