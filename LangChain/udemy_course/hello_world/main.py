@@ -1,24 +1,20 @@
-from langchain import OpenAIChat
 from prompt import prompt
 from knowledgebase import information
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
 
+load_dotenv()
 
 def main():
-
-    llm = OpenAIChat(
+    llm = ChatOpenAI(
         model="gpt-5", 
         temperature=0
     )
 
-    print(prompt)
-
     chain = prompt | llm
 
-    print(chain)
-
-    response = chain(information=information)
-
-    print(response)
+    response = chain.invoke({"information": information})
+    print(response.content)
 
 if __name__ == "__main__":
     main()

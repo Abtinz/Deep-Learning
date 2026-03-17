@@ -1,4 +1,4 @@
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 
 summary_template = """
     given the information {information} about a person I want you to create:
@@ -7,6 +7,5 @@ summary_template = """
     """
 
 prompt = PromptTemplate.from_template(
-        input_variables=["information"], 
-        template=summary_template
+    template=summary_template
 )
