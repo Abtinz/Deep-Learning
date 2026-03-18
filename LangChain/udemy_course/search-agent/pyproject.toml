@@ -1,0 +1,15 @@
+[project]
+name = "langchain-course-search-agent"
+version = "0.1.0"
+description = "Search agent scaffold based on the referenced LangChain course branch."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "black>=25.9.0",
+    "isort>=7.0.0",
+    "langchain>=1.0.4",
+    "langchain-openai>=1.0.2",
+    "langchain-tavily>=0.2.13",
+    "python-dotenv>=1.2.1",
+    "tavily-python>=0.7.12",
+]
