@@ -1,0 +1,7 @@
+fastapi>=0.115.0
+uvicorn>=0.30.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+python-dotenv>=1.0.1
+pytest>=8.0.0
+copilotkit>=0.1.83; python_version < "3.13"
