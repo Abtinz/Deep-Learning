@@ -1,30 +1,39 @@
-# SymanticSearch
+# Semantic Search Projects
 
-This folder contains semantic-search projects using embeddings and vector retrieval.
+## Project Overview
 
-## What Semantic Search Means Here
+Semantic Search Projects is a focused project in this repository that explores embedding-based semantic retrieval using external vector infrastructure. The implementation is notebook/script oriented, so you can inspect each phase (setup, experimentation, and outputs) in a practical, reproducible workflow.
 
-- Semantic search retrieves by meaning, not exact keyword matching.
-- Text is transformed into embeddings, then queried by vector similarity.
-- Retrieval quality depends on embedding model choice, chunking, and vector index configuration.
+The project is designed as a learning-and-building artifact rather than just a final demo. That means the folder captures iterative reasoning, experimentation choices, and intermediate patterns that are useful for extending the work into larger systems.
 
-## Core Concepts Implemented
-
-- Embedding generation for documents and queries.
-- Vector index creation and management.
-- Batch upsert and namespace usage.
-- Similarity query and result inspection.
-- Vector cleanup/delete workflows.
-
-## Projects In This Folder
+## Project Files
 
 - `Simantic_Search_OpenAI(ada3)_and_Pinecone.ipynb`
-  - OpenAI embeddings + Pinecone retrieval pipeline.
 - `Text_Embedding_with_Pretrained_model.ipynb`
-  - Embedding and retrieval workflow with pretrained models + Pinecone.
 
-## Models and Technologies Referenced
+## Technologies Used
 
-- OpenAI embedding families (Ada references in project naming/content).
-- Pinecone vector database (`Pinecone`, `ServerlessSpec`).
+The technical stack used here includes Jupyter Notebook, OpenAI embedding APIs, Pinecone SDK. These technologies were selected to keep the workflow modular: data/loading, model execution, and evaluation can each be changed independently without rewriting the whole project.
 
+From an engineering perspective, this stack supports fast iteration and clear separation of concerns. It allows you to move between notebook exploration and script-style execution, which is useful when transitioning from prototyping to a more production-oriented layout.
+
+## Models and Core Tools
+
+The core model/tooling layer in this project is: OpenAI embeddings (Ada references), Pinecone index retrieval. This model/tool choice defines the project’s quality, speed, and behavior envelope, so most of the prompt/configuration decisions in the folder are tuned around it.
+
+Conceptually, this layer is the engine of the project: it transforms raw inputs into task-specific outputs and determines what kind of reasoning or generation is possible. Understanding this layer deeply helps you decide where to tune parameters, where to add retrieval/tools, and where to switch to a different model family entirely.
+
+## Requirements
+
+- Python 3.10+
+- openai
+- pinecone-client
+- jupyter
+- OPENAI_API_KEY
+- PINECONE_API_KEY
+
+## Running Steps
+
+1. Open either semantic-search notebook.
+2. Set API keys in environment cells.
+3. Run embedding, upsert, and query workflows.
