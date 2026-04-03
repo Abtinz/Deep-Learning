@@ -3,3 +3,8 @@ Lang-Graph/codebasics_tutorial/.env
 GANs/models/Z-Image-Turbo/.venv
 /LangChain/udemy_course/hello_world/.env
 /LangChain/udemy_course/search-agent/.env
+.env
+ui/ux kits/**/.env
+ui/ux kits/**/__pycache__/
+ui/ux kits/**/.pytest_cache/
+ui/ux kits/**/result/
