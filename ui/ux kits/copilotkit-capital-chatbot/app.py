@@ -1,6 +1,7 @@
-"""FastAPI backend for country-capital chat interactions in Python."""
+"""FastAPI backend wired for CopilotKit-style chat interaction in Python."""
 
 import os
+from typing import Any
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
@@ -13,8 +14,18 @@ from capital_service import CapitalChatService
 load_dotenv()
 
 
-app = FastAPI(title="Capital Chatbot API")
+app = FastAPI(title="CopilotKit Capital Chatbot API")
 SERVICE = None
+COPILOTKIT_ERROR = None
+
+try:
+    from copilotkit import Action, CopilotKitRemoteEndpoint
+    from copilotkit.integrations.fastapi import add_fastapi_endpoint
+
+    COPILOTKIT_AVAILABLE = True
+except Exception as import_error:  # pragma: no cover - runtime environment dependent
+    COPILOTKIT_AVAILABLE = False
+    COPILOTKIT_ERROR = str(import_error)
 
 
 class CapitalRequest(BaseModel):
@@ -34,6 +45,7 @@ class HealthResponse(BaseModel):
 
     status: str
     has_openai_key: bool
+    copilotkit_available: bool
 
 
 def validate_environment() -> bool:
@@ -88,6 +100,57 @@ def resolve_capital(country: str) -> str:
     return get_service().get_capital(cleaned_country)
 
 
+def copilotkit_action_handler(arguments: dict[str, Any]) -> str:
+    """
+    Definition:
+        Handle CopilotKit action calls for country capital lookups.
+
+    Args:
+        arguments (dict[str, Any]): Action payload expected to include `country`.
+
+    Return:
+        str: Capital lookup result for the provided country.
+    """
+    return resolve_capital(str(arguments.get("country", "")))
+
+
+def configure_copilotkit_endpoint() -> None:
+    """
+    Definition:
+        Register the CopilotKit FastAPI endpoint when the SDK is installed.
+
+    Args:
+        None
+
+    Return:
+        None
+    """
+    if not COPILOTKIT_AVAILABLE:
+        return
+
+    sdk = CopilotKitRemoteEndpoint(
+        actions=[
+            Action(
+                name="get_country_capital",
+                description="Return the capital city for a given country.",
+                parameters=[
+                    {
+                        "name": "country",
+                        "type": "string",
+                        "description": "Country name to resolve the capital for.",
+                        "required": True,
+                    }
+                ],
+                handler=copilotkit_action_handler,
+            )
+        ]
+    )
+    add_fastapi_endpoint(app, sdk, "/copilotkit")
+
+
+configure_copilotkit_endpoint()
+
+
 @app.get("/health", response_model=HealthResponse)
 def health() -> HealthResponse:
     """
@@ -98,11 +161,12 @@ def health() -> HealthResponse:
         None
 
     Return:
-        HealthResponse: API status and key availability.
+        HealthResponse: API status, key availability, and CopilotKit status.
     """
     return HealthResponse(
         status="ok",
         has_openai_key=validate_environment(),
+        copilotkit_available=COPILOTKIT_AVAILABLE,
     )
 
 
@@ -110,7 +174,7 @@ def health() -> HealthResponse:
 def capital_lookup(payload: CapitalRequest) -> CapitalResponse:
     """
     Definition:
-        API endpoint for country-capital queries.
+        Fallback API endpoint for country-capital queries outside CopilotKit.
 
     Args:
         payload (CapitalRequest): Request body containing the country name.
@@ -123,3 +187,21 @@ def capital_lookup(payload: CapitalRequest) -> CapitalResponse:
         raise HTTPException(status_code=400, detail=answer)
 
     return CapitalResponse(capital=answer)
+
+
+@app.get("/copilotkit-status")
+def copilotkit_status() -> dict[str, Any]:
+    """
+    Definition:
+        Return CopilotKit integration status and optional import error details.
+
+    Args:
+        None
+
+    Return:
+        dict[str, Any]: Availability flag and diagnostics for CopilotKit import.
+    """
+    return {
+        "copilotkit_available": COPILOTKIT_AVAILABLE,
+        "copilotkit_error": COPILOTKIT_ERROR,
+    }
