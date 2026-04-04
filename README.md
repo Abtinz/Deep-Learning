@@ -140,6 +140,37 @@ A structured collection of notebooks and scripts covering deep learning, generat
   - Document embedding storage
   - Similarity query workflow (cosine/distance concepts)
 
+## ui/ux kits (`ui/ux kits/`)
+
+### streamlit-capital-chatbot
+- Streamlit-based country-capital chatbot (`streamlit-capital-chatbot/app.py`)
+- Uses LangChain `ChatOpenAI` for capital lookup responses
+- Implemented subjects:
+  - Prompt-guided capital retrieval from country input
+  - Streamlit chat UI interaction flow
+  - Invalid-country fallback behavior (`Unknown country.`)
+
+### gradio-capital-chatbot
+- Gradio web UI country-capital chatbot (`gradio-capital-chatbot/app.py`)
+- Uses LangChain `ChatOpenAI` to map country names to capitals
+- Implemented subjects:
+  - Lightweight chatbot UI in Gradio Blocks/Interface flow
+  - Country query handling and assistant response rendering
+  - Testable app structure with pytest support
+
+### copilotkit-capital-chatbot
+- FastAPI backend for capital queries with CopilotKit-compatible routing (`copilotkit-capital-chatbot/app.py`)
+- Uses LangChain `ChatOpenAI` for capital resolution logic
+- API behavior and endpoints:
+  - `GET /health`
+  - `GET /copilotkit-status`
+  - `POST /capital`
+  - `POST /copilotkit` (when `copilotkit` imports successfully)
+- Implemented subjects:
+  - CopilotKit endpoint registration with runtime availability checks
+  - Fallback capital API flow when CopilotKit package is unavailable
+  - Service health/status reporting for integration diagnostics
+
 ## License
 
 This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for full text.
