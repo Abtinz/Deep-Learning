@@ -96,6 +96,18 @@ A structured collection of notebooks and scripts covering deep learning, generat
   - OpenAI `gpt-5`
   - Tavily search tool
 
+### udemy_course / Medium_analyzer
+- Medium blog semantic retrieval workflow with Pinecone vector search.
+- Key notebooks:
+  - `ingestion_pipeline_workflow.ipynb` for document ingestion/chunking/indexing.
+  - `retrieval_chain_without_lcel.ipynb` for baseline retrieval chain wiring.
+  - `retrieval_chain_with_lcel.ipynb` for LCEL-based retrieval chain composition.
+- Implemented lessons:
+  - Environment-driven OpenAI + Pinecone setup.
+  - Retriever configuration and context-grounded prompting.
+  - LCEL chain composition with reusable chain-builder function.
+  - Optional chain visualization (`ASCII`, `Mermaid`, PNG export; PNG requires `pygraphviz`).
+
 ## MCP (`MCP/`)
 
 ### Authentiation

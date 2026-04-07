@@ -29,6 +29,11 @@ This folder contains LangChain-based applications and course exercises, includin
   - ReAct implementations at different abstraction levels.
 - `udemy_course/search-agent/main.py`
   - Search agent with structured output schema and external search tool integration.
+- `udemy_course/Medium_analyzer`
+  - `ingestion_pipeline_workflow.ipynb`
+  - `retrieval_chain_without_lcel.ipynb`
+  - `retrieval_chain_with_lcel.ipynb`
+  - Pinecone-backed retrieval workflow with LCEL and optional chain visualization.
 
 ## Models and Technologies Referenced
 
@@ -36,4 +41,5 @@ This folder contains LangChain-based applications and course exercises, includin
 - Ollama models: `gemma3:270m`, `qwen3:1.7b`
 - Tavily search integration
 - LangSmith tracing
-
+- Pinecone vector database
+- LCEL graph visualization helpers (`ASCII`, `Mermaid`, optional PNG via `pygraphviz`)
