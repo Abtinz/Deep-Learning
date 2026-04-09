@@ -1,33 +1,68 @@
-# Scraping and Crawling
+# Tavily Scraping and Crawling Demo
 
-Simple Tavily crawl demo adapted from:
-`Tavily Crawl Demo Tutorial.ipynb`
+This project is a practical, lightweight demo of **Tavily Crawl** for collecting web data you can use in RAG pipelines, search workflows, and documentation ingestion.
 
-Source:
+Source inspiration:
 `https://github.com/emarco177/documentation-helper/blob/main/Tavily%20Crawl%20Demo%20Tutorial.ipynb`
 
-## What this folder includes
+## What is Tavily and why it is useful
 
-- `Tavily_Crawl_Demo_Tutorial.ipynb`: simplified notebook version
-- `crawl_demo.py`: script version of the same flow
-- `requirements.txt`: minimal dependencies
-- `.env.example`: environment variable template
+Tavily is a search and crawl API built for AI applications.
 
-## Quick start
+Why it is useful:
+- It can crawl websites and extract page content in a structure that is easy to process in Python.
+- You can use instruction-guided crawling (natural language prompts) to reduce noisy pages.
+- It fits well for LLM pipelines where you need relevant, fresh web context quickly.
 
-1. Run setup script:
-   `sh setup_env.sh`
-2. Create `.env` from `.env.example` and set your key:
-   `TAVILY_API_KEY=...`
-3. Activate env:
-   `source .venv/bin/activate`
-4. Run:
-   `python crawl_demo.py`
+In this demo, we compare:
+- Baseline crawl (no instructions)
+- Guided crawl (`Find all pages about ai agents`)
 
-## Notes
+## Project files
 
-- This demo compares:
-  - baseline crawl (no instructions)
-  - instruction-guided crawl (`"Find all pages about ai agents"`)
-- Target URL defaults to:
-  `https://python.langchain.com/`
+- `crawl_demo.py`: main runnable script
+- `Tavily_Crawl_Demo_Tutorial.ipynb`: notebook version
+- `setup_env.sh`: creates `.venv`, installs dependencies, and registers Jupyter kernel
+- `run.sh`: one-command setup + run flow
+- `requirements.txt`: dependencies
+- `.env.example`: API key template
+- `crawled/`: generated JSON/TXT outputs (git-ignored)
+
+## Quick start (recommended)
+
+1. Add your Tavily key:
+```bash
+cp .env.example .env
+# edit .env and set TAVILY_API_KEY=...
+```
+
+2. Run everything:
+```bash
+./run.sh
+```
+
+This will:
+- ensure virtual environment is ready
+- install requirements
+- register notebook kernel: `Python (scraping-and-crawling)`
+- run the crawl demo
+- save outputs in `crawled/`
+
+## Manual commands
+
+```bash
+sh setup_env.sh
+source .venv/bin/activate
+python crawl_demo.py
+```
+
+## Output files
+
+After a run, you will see:
+- `crawled/baseline_results.json`
+- `crawled/baseline_results.txt`
+- `crawled/guided_results.json`
+- `crawled/guided_results.txt`
+
+JSON stores raw retrieved records.
+TXT stores cleaned, readable text extracted from those records.

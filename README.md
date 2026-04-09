@@ -185,6 +185,23 @@ A structured collection of notebooks and scripts covering deep learning, generat
   - Fallback capital API flow when CopilotKit package is unavailable
   - Service health/status reporting for integration diagnostics
 
+### scraping_and_crawling (`tools/scraping_and_crawling/`)
+
+#### Tavily crawl demo
+- Simple Tavily-based web crawling workflow with baseline vs instruction-guided crawl (`tools/scraping_and_crawling/crawl_demo.py`)
+- Shell automation:
+  - `setup_env.sh`: venv setup + dependency install + Jupyter kernel registration
+  - `run.sh`: one-command setup + run
+- Saved outputs:
+  - `crawled/baseline_results.json`
+  - `crawled/baseline_results.txt`
+  - `crawled/guided_results.json`
+  - `crawled/guided_results.txt`
+- Implemented subjects:
+  - API-key based Tavily integration (`TAVILY_API_KEY`)
+  - Instruction-guided crawling for relevance filtering
+  - JSON persistence + cleaned text export for downstream use
+
 ## License
 
 This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for full text.
