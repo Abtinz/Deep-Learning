@@ -34,6 +34,11 @@ This folder contains LangChain-based applications and course exercises, includin
   - `retrieval_chain_without_lcel.ipynb`
   - `retrieval_chain_with_lcel.ipynb`
   - Pinecone-backed retrieval workflow with LCEL and optional chain visualization.
+- `udemy_course/langchain Documentation Helper(agentic-rag)`
+  - `ingestion.ipynb`
+  - `core.ipynb`
+  - `rag_chroma.py`
+  - Agentic RAG workflow using Tavily ingestion + Chroma retrieval + LangChain tools/agent.
 
 ## Models and Technologies Referenced
 
