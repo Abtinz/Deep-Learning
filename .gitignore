@@ -20,3 +20,8 @@ __pycache__/
 .hypothesis/
 .tox/
 .nox/
+
+# Virtual environments (global)
+.venv/
+venv/
+ENV/
