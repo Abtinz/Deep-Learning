@@ -143,35 +143,37 @@ A structured collection of notebooks and scripts covering deep learning, generat
   - Vector upsert/retrieval flow
   - Similarity-based semantic querying
 
-## vector_database (`vector_database/`)
+## tools (`tools/`)
 
-### chromadb
-- ChromaDB crash-course notebook (`chroma_db.ipynb`)
+### vector_database (`tools/vector_database/`)
+
+#### chromadb
+- ChromaDB crash-course notebook (`tools/vector_database/chromadb/chroma_db.ipynb`)
 - Implemented subjects:
   - Collection creation and management
   - Document embedding storage
   - Similarity query workflow (cosine/distance concepts)
 
-## ui/ux kits (`ui/ux kits/`)
+### ui/ux kits (`tools/ui/ux kits/`)
 
-### streamlit-capital-chatbot
-- Streamlit-based country-capital chatbot (`streamlit-capital-chatbot/app.py`)
+#### streamlit-capital-chatbot
+- Streamlit-based country-capital chatbot (`tools/ui/ux kits/streamlit-capital-chatbot/app.py`)
 - Uses LangChain `ChatOpenAI` for capital lookup responses
 - Implemented subjects:
   - Prompt-guided capital retrieval from country input
   - Streamlit chat UI interaction flow
   - Invalid-country fallback behavior (`Unknown country.`)
 
-### gradio-capital-chatbot
-- Gradio web UI country-capital chatbot (`gradio-capital-chatbot/app.py`)
+#### gradio-capital-chatbot
+- Gradio web UI country-capital chatbot (`tools/ui/ux kits/gradio-capital-chatbot/app.py`)
 - Uses LangChain `ChatOpenAI` to map country names to capitals
 - Implemented subjects:
   - Lightweight chatbot UI in Gradio Blocks/Interface flow
   - Country query handling and assistant response rendering
   - Testable app structure with pytest support
 
-### copilotkit-capital-chatbot
-- FastAPI backend for capital queries with CopilotKit-compatible routing (`copilotkit-capital-chatbot/app.py`)
+#### copilotkit-capital-chatbot
+- FastAPI backend for capital queries with CopilotKit-compatible routing (`tools/ui/ux kits/copilotkit-capital-chatbot/app.py`)
 - Uses LangChain `ChatOpenAI` for capital resolution logic
 - API behavior and endpoints:
   - `GET /health`
@@ -182,6 +184,23 @@ A structured collection of notebooks and scripts covering deep learning, generat
   - CopilotKit endpoint registration with runtime availability checks
   - Fallback capital API flow when CopilotKit package is unavailable
   - Service health/status reporting for integration diagnostics
+
+### scraping_and_crawling (`tools/scraping_and_crawling/`)
+
+#### Tavily crawl demo
+- Simple Tavily-based web crawling workflow with baseline vs instruction-guided crawl (`tools/scraping_and_crawling/crawl_demo.py`)
+- Shell automation:
+  - `setup_env.sh`: venv setup + dependency install + Jupyter kernel registration
+  - `run.sh`: one-command setup + run
+- Saved outputs:
+  - `crawled/baseline_results.json`
+  - `crawled/baseline_results.txt`
+  - `crawled/guided_results.json`
+  - `crawled/guided_results.txt`
+- Implemented subjects:
+  - API-key based Tavily integration (`TAVILY_API_KEY`)
+  - Instruction-guided crawling for relevance filtering
+  - JSON persistence + cleaned text export for downstream use
 
 ## License
 

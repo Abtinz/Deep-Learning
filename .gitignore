@@ -8,3 +8,20 @@ ui/ux kits/**/.env
 ui/ux kits/**/__pycache__/
 ui/ux kits/**/.pytest_cache/
 ui/ux kits/**/result/
+
+# Python caches (global)
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+.tox/
+.nox/
+
+# Virtual environments (global)
+.venv/
+venv/
+ENV/
