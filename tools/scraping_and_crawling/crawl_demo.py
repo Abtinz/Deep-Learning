@@ -7,12 +7,10 @@ from typing import Any
 import certifi
 from dotenv import load_dotenv
 from langchain_tavily import TavilyCrawl
+import crawl_configs
 
 def setup_env() -> None:
     """Load environment variables and SSL settings for Tavily requests.
-
-    Returns:
-        None.
 
     Raises:
         RuntimeError: If `TAVILY_API_KEY` is missing.
@@ -49,15 +47,12 @@ def print_sample(title: str, rows: list[dict[str, Any]], limit: int = 3) -> None
         title: Section title to print.
         rows: Crawl result rows to preview.
         limit: Maximum number of rows to print.
-
-    Returns:
-        None.
     """
     print(f"\n{title}: {len(rows)} pages")
     for i, item in enumerate(rows[:limit], start=1):
         url = item.get("url", "N/A")
         raw = item.get("raw_content", "") or ""
-        preview = raw[:160].replace("\n", " ")
+        preview = raw[:400].replace("\n", " ")
         print(f"{i}. {url}")
         print(f"   {preview}...")
 
@@ -82,8 +77,6 @@ def save_results(name: str, rows: list[dict[str, Any]]) -> None:
         name: File prefix for output files.
         rows: Crawl result rows to save.
 
-    Returns:
-        None.
     """
     os.makedirs("crawled", exist_ok=True)
 
@@ -108,39 +101,33 @@ def save_results(name: str, rows: list[dict[str, Any]]) -> None:
 
 
 def main() -> None:
-    """Execute the full crawl demo workflow.
 
-    Returns:
-        None.
-    """
     setup_env()
     crawler = TavilyCrawl()
-
-    target_url = "https://python.langchain.com/"
-    instructions = "Find all pages about ai agents"
 
     basic_results = run_crawl(
         crawler,
         {
-            "url": target_url,
-            "max_depth": 1,
-            "extract_depth": "advanced",
-        },
-    )
-
-    guided_results = run_crawl(
-        crawler,
-        {
-            "url": target_url,
-            "instructions": instructions,
-            "max_depth": 3,
-            "extract_depth": "advanced",
+            "url": crawl_configs.URL,
+            "max_depth": crawl_configs.MAX_DEPTH,
+            "extract_depth": crawl_configs.EXTRACT_DEPTH,
         },
     )
 
     print_sample("Baseline crawl (no instructions)", basic_results)
-    print_sample("Instruction-guided crawl", guided_results)
     save_results("baseline_results", basic_results)
+
+    guided_results = run_crawl(
+        crawler,
+        {
+            "url": crawl_configs.URL,
+            "instructions": crawl_configs.INSTRUCTIONS,
+            "max_depth": crawl_configs.MAX_DEPTH,
+            "extract_depth": crawl_configs.EXTRACT_DEPTH,
+        },
+    )
+
+    print_sample("Instruction-guided crawl", guided_results)
     save_results("guided_results", guided_results)
 
     if basic_results:
