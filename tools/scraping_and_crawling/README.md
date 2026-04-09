@@ -7,12 +7,15 @@ Source inspiration:
 
 ## What is Tavily and why it is useful
 
-Tavily is a search and crawl API built for AI applications.
+TavilyCrawl is an intelligent web crawler that uses AI to determine which paths to explore during crawling. It combines AI-powered decision making with parallel processing capabilities.
+Key Features:
 
-Why it is useful:
-- It can crawl websites and extract page content in a structure that is easy to process in Python.
-- You can use instruction-guided crawling (natural language prompts) to reduce noisy pages.
-- It fits well for LLM pipelines where you need relevant, fresh web context quickly.
+    - AI-Powered Path Selection: Uses AI to determine which paths to explore
+    - Parallel Processing: Explores hundreds of paths simultaneously
+    - Advanced Extraction: Extracts content from dynamically rendered pages
+    - Instruction-Driven: Follows natural language instructions to guide exploration
+    - Targeted Content: Returns content tailored for LLM integration and RAG systems
+
 
 In this demo, we compare:
 - Baseline crawl (no instructions)
