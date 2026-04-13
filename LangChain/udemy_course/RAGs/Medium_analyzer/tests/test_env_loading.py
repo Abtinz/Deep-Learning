@@ -5,7 +5,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from ingestion import load_env_params, run_ingestion
+from LangChain.udemy_course.RAGs.Medium_analyzer.ingestion import load_env_params, run_ingestion
 
 
 def test_load_env_params_returns_required_keys():
