@@ -71,42 +71,19 @@ A structured collection of notebooks and scripts covering deep learning, generat
 - Travel planning/scheduling notebook (`Travel_Scheduler_LLM.ipynb`)
 - Model theme referenced in notebook: IBM Granite 3.2
 
-### udemy_course / hello_world
-- Prompt + context pipeline with LangChain chains
-- Models used:
-  - OpenAI `gpt-5`
-  - Ollama `gemma3:270m`
-
-### udemy_course / ReAct
-- LangChain tool-calling ReAct loop (`tool_calling/1_agent_loop_langchain_tool_calling.py`)
-- Raw SDK tool calling with manual tool schema (`raw_tool_calling/raw_tool_calling.py`)
-- Raw prompt-only ReAct notebook (`raw_react_prompt/3_raw_react_prompt.ipynb`)
-- Models used:
-  - `gpt-3.5-turbo` (LangChain tool-calling config)
-  - Ollama `qwen3:1.7b` (raw tool-calling and raw prompt ReAct)
-- Implemented lessons:
-  - Tool schema design
-  - Multi-turn agent loops
-  - Tool execution and observation handling
-  - ReAct prompt structuring and parsing
-
-### udemy_course / search-agent
-- Search agent scaffold using external search tool integration
-- Stack/models:
-  - OpenAI `gpt-5`
-  - Tavily search tool
-
-### udemy_course / Medium_analyzer
-- Medium blog semantic retrieval workflow with Pinecone vector search.
-- Key notebooks:
-  - `ingestion_pipeline_workflow.ipynb` for document ingestion/chunking/indexing.
-  - `retrieval_chain_without_lcel.ipynb` for baseline retrieval chain wiring.
-  - `retrieval_chain_with_lcel.ipynb` for LCEL-based retrieval chain composition.
-- Implemented lessons:
-  - Environment-driven OpenAI + Pinecone setup.
-  - Retriever configuration and context-grounded prompting.
-  - LCEL chain composition with reusable chain-builder function.
-  - Optional chain visualization (`ASCII`, `Mermaid`, PNG export; PNG requires `pygraphviz`).
+### udemy_course
+- Practical multi-project workspace for course experiments and refactors
+- Includes:
+  - `hello_world/`: prompt + context foundations
+  - `search-agent/`: Tavily-powered search agent
+  - `ReAct/`: tool-calling ReAct patterns (LangChain + raw implementations)
+  - `RAGs/`: retrieval projects (`Medium_analyzer`, `Tavily`, `langchain Documentation Helper(agentic-rag)`)
+  - `langgraph/`: ReAct-style LangGraph agent with crawl/search tools and loop safeguards
+- Common stack:
+  - OpenAI models (`gpt-5`, `gpt-4o-mini`, `gpt-3.5-turbo`)
+  - Tavily search/crawl
+  - LangChain + LangGraph
+  - `uv`-managed Python environments
 
 ## MCP (`MCP/`)
 
