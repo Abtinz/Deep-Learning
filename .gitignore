@@ -25,3 +25,7 @@ __pycache__/
 .venv/
 venv/
 ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
