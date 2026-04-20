@@ -27,6 +27,7 @@ uv pip install \
   langchain \
   langgraph \
   tavily-python \
+  langchain-tavily \
   langchain-openai \
   python-dotenv \
   black \

@@ -12,12 +12,14 @@ def retrieve(state: GraphState) -> Dict[str, Any]:
         A dictionary containing the retrieved documents and the original question.
     '''
     print("---RETRIEVE---")
-    print(f"Question: {state['question']}")
+    print(f"---RETRIEVE--- Question: {state['question']}")
 
     question = state["question"]
 
     documents = retriever.invoke(question)
+
     results = [doc.page_content for doc in documents]
     
-    print(f"Retrieved {len(results)} documents.")
+    print(f"---RETRIEVE--- Retrieved {len(results)} documents.")
+    
     return {"documents": documents, "question": question}

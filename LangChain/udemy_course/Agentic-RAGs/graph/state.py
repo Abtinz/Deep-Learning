@@ -1,4 +1,6 @@
-from typing import List, TypedDict
+from typing import List, TypedDict, Union
+
+from langchain_core.documents import Document
 
 class GraphState(TypedDict):
     """
@@ -14,4 +16,4 @@ class GraphState(TypedDict):
     question: str
     generation: str
     web_search: bool
-    documents: List[str]
+    documents: List[Union[Document, str]]
