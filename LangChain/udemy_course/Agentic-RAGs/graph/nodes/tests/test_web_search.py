@@ -1,5 +1,7 @@
+import importlib
 from types import SimpleNamespace
 
+web_search_module = importlib.import_module("graph.nodes.web_search")
 from graph.nodes.web_search import web_search
 
 
@@ -7,12 +9,14 @@ def test_web_search_appends_tavily_results_to_existing_documents(monkeypatch) ->
     class DummySearch:
         def invoke(self, payload):
             assert payload["query"] == "agent memory"
-            return [
-                {"content": "First result"},
-                {"content": "Second result"},
-            ]
+            return {
+                "results": [
+                    {"content": "First result"},
+                    {"content": "Second result"},
+                ]
+            }
 
-    monkeypatch.setattr("graph.nodes.web_search.web_search_tool", DummySearch())
+    monkeypatch.setattr(web_search_module, "web_search_tool", DummySearch())
 
     existing = [SimpleNamespace(page_content="Existing doc")]
     result = web_search({"question": "agent memory", "documents": existing})
@@ -26,7 +30,7 @@ def test_web_search_creates_documents_list_when_none(monkeypatch) -> None:
         def invoke(self, payload):
             return [{"content": "Only result"}]
 
-    monkeypatch.setattr("graph.nodes.web_search.web_search_tool", DummySearch())
+    monkeypatch.setattr(web_search_module, "web_search_tool", DummySearch())
 
     result = web_search({"question": "agent memory", "documents": None})
 

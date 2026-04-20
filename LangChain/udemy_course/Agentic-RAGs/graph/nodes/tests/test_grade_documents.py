@@ -1,5 +1,7 @@
+import importlib
 from types import SimpleNamespace
 
+grade_documents_module = importlib.import_module("graph.nodes.grade_documents")
 from graph.nodes.grade_documents import grade_documents
 
 
@@ -10,7 +12,7 @@ def test_grade_documents_filters_irrelevant_docs_and_triggers_web_search(monkeyp
             score = "no" if "irrelevant" in text else "yes"
             return SimpleNamespace(binary_score=score)
 
-    monkeypatch.setattr("graph.nodes.grade_documents.retrieval_grader", DummyGrader())
+    monkeypatch.setattr(grade_documents_module, "retrieval_grader", DummyGrader())
 
     state = {
         "question": "What is agent memory?",
@@ -32,7 +34,7 @@ def test_grade_documents_supports_plain_string_documents(monkeypatch) -> None:
         def invoke(self, payload):
             return SimpleNamespace(binary_score="yes")
 
-    monkeypatch.setattr("graph.nodes.grade_documents.retrieval_grader", DummyGrader())
+    monkeypatch.setattr(grade_documents_module, "retrieval_grader", DummyGrader())
 
     state = {
         "question": "What is retrieval?",

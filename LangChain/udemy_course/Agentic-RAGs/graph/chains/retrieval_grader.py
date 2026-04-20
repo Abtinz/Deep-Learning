@@ -1,15 +1,18 @@
-from typing import Literal
-
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(temperature=0)
 
 class GradeDocuments(BaseModel):
     """Binary score for relevance check on retrieved documents."""
 
-    binary_score: Literal["yes", "no"] = Field(
+    binary_score: str = Field(
         description="Documents are relevant to the question, 'yes' or 'no'"
     )
+
+# Create a structured output LLM chain for grading the relevance of retrieved documents
+structured_llm_grader = llm.with_structured_output(GradeDocuments)
 
 system = """You are a grader assessing relevance of a retrieved document to a user question. \n 
     If the document contains keyword(s) or semantic meaning related to the question, grade it as relevant. \n
@@ -22,20 +25,5 @@ grade_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-
-class _LazyRetrievalGrader:
-    def __init__(self) -> None:
-        self._chain = None
-
-    def _build_chain(self):
-        llm = ChatOpenAI(model="gpt-4", temperature=0)
-        structured_llm_grader = llm.with_structured_output(GradeDocuments)
-        return grade_prompt | structured_llm_grader
-
-    def invoke(self, payload: dict) -> GradeDocuments:
-        if self._chain is None:
-            self._chain = self._build_chain()
-        return self._chain.invoke(payload)
-
-
-retrieval_grader = _LazyRetrievalGrader()
+# Combine the prompt template with the structured output LLM to create the retrieval grader chain
+retrieval_grader = grade_prompt | structured_llm_grader

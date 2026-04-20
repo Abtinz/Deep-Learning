@@ -11,6 +11,13 @@ load_dotenv()
 web_search_tool = TavilySearch(max_results=3)
 
 
+def _extract_results(payload: Any) -> list[dict[str, Any]]:
+    if isinstance(payload, dict):
+        results = payload.get("results", [])
+        return results if isinstance(results, list) else []
+    return payload if isinstance(payload, list) else []
+
+
 def _join_tavily_content(tavily_results: list[dict[str, Any]]) -> str:
     '''Joins the content from the TavilySearch results into a single string.
     Args:
@@ -31,10 +38,11 @@ def web_search(state: GraphState) -> Dict[str, Any]:
     documents = state.get("documents")
     
     # Use the TavilySearch tool to perform a web search based on the question
-    tavily_results = web_search_tool.invoke({"query": question})
+    raw_results = web_search_tool.invoke({"query": question})
+    tavily_results = _extract_results(raw_results)
 
     joined_tavily_result = _join_tavily_content(tavily_results)
-    print(f"---WEB SEARCH--- Retrieved {len(joined_tavily_result)} web results.")
+    print(f"---WEB SEARCH--- Retrieved {len(tavily_results)} web results.")
 
     # Create a Document object to store the joined TavilySearch results
     web_results = Document(
