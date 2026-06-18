@@ -1,0 +1,6 @@
+{
+  "name": "Snowflakes and Balloons",
+  "description": "A formal, elegant simulation displaying falling snowflakes and floating balloons with smooth motion effects.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
